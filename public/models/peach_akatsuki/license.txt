@@ -1,0 +1,11 @@
+Model Information:
+* title:	Peach "Akatsuki" / 桃（あかつき）
+* source:	https://sketchfab.com/3d-models/peach-akatsuki-0637543be6bc42a89d8c76b08395b6eb
+* author:	masanaga (https://sketchfab.com/tasklong)
+
+Model License:
+* license type:	CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)
+* requirements:	Author must be credited. No commercial use.
+
+If you use this 3D model in your project be sure to copy paste this credit wherever you share it:
+This work is based on "Peach "Akatsuki" / 桃（あかつき）" (https://sketchfab.com/3d-models/peach-akatsuki-0637543be6bc42a89d8c76b08395b6eb) by masanaga (https://sketchfab.com/tasklong) licensed under CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)

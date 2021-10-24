@@ -1,0 +1,236 @@
+{
+  "accessors": [
+    {
+      "bufferView": 2,
+      "componentType": 5126,
+      "count": 22791,
+      "max": [
+        14.4595365524292,
+        -1.8741848468780518,
+        5.440712928771973
+      ],
+      "min": [
+        -7.424391269683838,
+        -21.59077262878418,
+        -15.532648086547852
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 2,
+      "byteOffset": 273492,
+      "componentType": 5126,
+      "count": 22791,
+      "max": [
+        0.999935507774353,
+        0.9999827146530151,
+        0.9999579787254333
+      ],
+      "min": [
+        -0.9999982118606567,
+        -0.9999737739562988,
+        -0.9997456669807434
+      ],
+      "type": "VEC3"
+    },
+    {
+      "bufferView": 3,
+      "componentType": 5126,
+      "count": 22791,
+      "max": [
+        0.9999987483024597,
+        0.9814804792404175,
+        0.9975889325141907,
+        1.0
+      ],
+      "min": [
+        -0.9999990463256836,
+        -0.9770916104316711,
+        -0.9980984926223755,
+        1.0
+      ],
+      "type": "VEC4"
+    },
+    {
+      "bufferView": 1,
+      "componentType": 5126,
+      "count": 22791,
+      "max": [
+        0.9981300234794617,
+        0.9897459745407104
+      ],
+      "min": [
+        0.0004879999905824661,
+        0.0005150000215508044
+      ],
+      "type": "VEC2"
+    },
+    {
+      "bufferView": 0,
+      "componentType": 5125,
+      "count": 125166,
+      "type": "SCALAR"
+    }
+  ],
+  "asset": {
+    "extras": {
+      "author": "masanaga (https://sketchfab.com/tasklong)",
+      "license": "CC-BY-NC-4.0 (http://creativecommons.org/licenses/by-nc/4.0/)",
+      "source": "https://sketchfab.com/3d-models/peach-akatsuki-0637543be6bc42a89d8c76b08395b6eb",
+      "title": "Peach \"Akatsuki\" / 桃（あかつき）"
+    },
+    "generator": "Sketchfab-11.57.0",
+    "version": "2.0"
+  },
+  "bufferViews": [
+    {
+      "buffer": 0,
+      "byteLength": 500664,
+      "name": "floatBufferViews",
+      "target": 34963
+    },
+    {
+      "buffer": 0,
+      "byteLength": 182328,
+      "byteOffset": 500664,
+      "byteStride": 8,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 546984,
+      "byteOffset": 682992,
+      "byteStride": 12,
+      "name": "floatBufferViews",
+      "target": 34962
+    },
+    {
+      "buffer": 0,
+      "byteLength": 364656,
+      "byteOffset": 1229976,
+      "byteStride": 16,
+      "name": "floatBufferViews",
+      "target": 34962
+    }
+  ],
+  "buffers": [
+    {
+      "byteLength": 1594632,
+      "uri": "scene.bin"
+    }
+  ],
+  "extensionsUsed": [
+    "KHR_materials_clearcoat"
+  ],
+  "images": [
+    {
+      "uri": "textures/akatsuki02_Model_6_u0_v0_baseColor.jpeg"
+    },
+    {
+      "uri": "textures/akatsuki02_Model_6_u0_v0_normal.png"
+    }
+  ],
+  "materials": [
+    {
+      "doubleSided": true,
+      "extensions": {
+        "KHR_materials_clearcoat": {
+          "clearcoatFactor": 1.0,
+          "clearcoatRoughnessFactor": 1.0
+        }
+      },
+      "name": "akatsuki02_Model_6_u0_v0",
+      "normalTexture": {
+        "index": 1
+      },
+      "pbrMetallicRoughness": {
+        "baseColorTexture": {
+          "index": 0
+        },
+        "metallicFactor": 0.0
+      }
+    }
+  ],
+  "meshes": [
+    {
+      "name": "Object_0",
+      "primitives": [
+        {
+          "attributes": {
+            "NORMAL": 1,
+            "POSITION": 0,
+            "TANGENT": 2,
+            "TEXCOORD_0": 3
+          },
+          "indices": 4,
+          "material": 0,
+          "mode": 4
+        }
+      ]
+    }
+  ],
+  "nodes": [
+    {
+      "children": [
+        1
+      ],
+      "matrix": [
+        0.9649947285652161,
+        -8.599103626816279e-17,
+        0.26226919889450073,
+        0.0,
+        1.3877787807814457e-16,
+        -1.0,
+        -8.257283745649602e-16,
+        0.0,
+        0.26226919889450073,
+        8.353028776586982e-16,
+        -0.9649947285652161,
+        0.0,
+        1.4465217590332031,
+        -16.778419494628906,
+        5.940670013427731,
+        1.0
+      ],
+      "name": "Sketchfab_model"
+    },
+    {
+      "children": [
+        2
+      ],
+      "name": "akatsuki02_Model_6.obj.cleaner.materialmerger.gles"
+    },
+    {
+      "mesh": 0,
+      "name": "Object_2"
+    }
+  ],
+  "samplers": [
+    {
+      "magFilter": 9729,
+      "minFilter": 9987,
+      "wrapS": 10497,
+      "wrapT": 10497
+    }
+  ],
+  "scene": 0,
+  "scenes": [
+    {
+      "name": "Sketchfab_Scene",
+      "nodes": [
+        0
+      ]
+    }
+  ],
+  "textures": [
+    {
+      "sampler": 0,
+      "source": 0
+    },
+    {
+      "sampler": 0,
+      "source": 1
+    }
+  ]
+}
