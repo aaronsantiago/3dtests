@@ -48,8 +48,8 @@ function TerrainTest() {
             },
           },
           {
-            diffuse: { tile: 1, repeat: [50, 50] },
-            normal: { tile: 1, repeat: [50, 50], weight: 0.5 },
+            diffuse: { tile: 1, repeat: [35, 35] },
+            normal: { tile: 1, repeat: [35, 35], weight: 0.5 },
           },
         ]}
       />

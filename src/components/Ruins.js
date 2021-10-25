@@ -9,7 +9,7 @@ export default function Model({ ...props }) {
   const group = useRef()
   const { nodes, materials } = useGLTF('models/ruins2.gltf')
   return (
-    <group ref={group} {...props} dispose={null}>
+    <group ref={group} {...props} dispose={null} scale={[3,3,3]}>
       <mesh
         geometry={nodes.Mesh_0.geometry}
         material={materials.Material_0}
