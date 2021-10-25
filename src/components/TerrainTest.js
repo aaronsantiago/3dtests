@@ -5,9 +5,9 @@ import { useControls } from "leva";
 function TerrainTest() {
   let root = "terrains/test";
   const { position, rotation, scale, normalScale } = useControls({
-    position: { x: -3.32, y: 3.39, z: -5 },
+    position: { x: -3.32, y: 40, z: -5 },
     rotation: { x: -0.07, y: 0.3, z: 0 },
-    scale: { x: 0.07, y: 0.07, z: 0.07 },
+    scale: { x: 1, y: 1, z: 1 },
     normalScale: {x: 1, y: 1},
   });
   return (
@@ -29,17 +29,18 @@ function TerrainTest() {
         splats={[`${root}/splatmap.tga`]}
         tiles={[
           {
-            diffuse: `${root}/dirt/col.png`,
+            // diffuse: `${root}/dirt/col.png`,
+            diffuse: `gradient/Grainy gradient 78.png`,
             normal: `${root}/dirt/norm.png`,
           },
           {
-            diffuse: `${root}/grass/col.png`,
+            diffuse: `gradient/Grainy gradient 78.png`,
             normal: `${root}/grass/norm.png`,
           },
         ]}
         layers={[
           {
-            diffuse: { tile: 1, repeat: [50, 50] },
+            diffuse: { tile: 1, repeat: [4, 4] },
             normal: {
               tile: 1,
               repeat: [50, 50],
@@ -48,8 +49,8 @@ function TerrainTest() {
             },
           },
           {
-            diffuse: { tile: 1, repeat: [35, 35] },
-            normal: { tile: 1, repeat: [35, 35], weight: 0.5 },
+            diffuse: { tile: 0, repeat: [1, 1] },
+            normal: { tile: 0, repeat: [1, 1], weight: 0.5 },
           },
         ]}
       />
