@@ -104,11 +104,12 @@ function ShaderBall(props) {
         envMap={props.envMap}
         factor={props.factor}
         displacementScale={0.2}
-        transparent
+        // transparent
+        side= {THREE.DoubleSide}
         movement={props.movement}
         // map={colorMap}
         color={"#9f9f9f"}
-        opacity={.9}
+        // opacity={.9}
         // depthWrite={false}
         // displacementMap={displacementMap}
         // normalMap={normalMap}

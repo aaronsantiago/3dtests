@@ -34,6 +34,17 @@ function Main() {
     focusDistance: 1,
   });
   const zeroPad = (num, places) => String(num).padStart(places, "0");
+
+  const verticesOfCube = [
+    -1, -1, -1, 1, -1, -1, 1, 1, -1, -1, 1, -1, -1, -1, 1, 1, -1, 1, 1, 1, 1,
+    -1, 1, 1,
+  ];
+
+  const indicesOfFaces = [
+    2, 1, 0, 0, 3, 2, 0, 4, 7, 7, 3, 0, 0, 1, 5, 5, 4, 0, 1, 2, 6, 6, 5, 1, 2,
+    3, 7, 7, 6, 2, 4, 5, 6, 6, 7, 4,
+  ];
+
   return (
     <div className="w-screen h-screen">
       <Canvas colorManagement shadowMap pixelRatio={window.devicePixelRatio}>
@@ -80,26 +91,52 @@ function Main() {
                 timeOffset={Math.random() * 1118173}
                 rotation={[0, -Math.PI / 4, 0]}
                 scale={[scale, scale, scale]}
-                factor={.2}
+                factor={0.2}
               >
-                <sphereGeometry args={[1, 64, 64]} />
+                <sphereGeometry args={[1, 32, 32]} />
               </ShaderBall>
             );
           })}
         {/* )} */}
         {/* </CubeCamera> */}
         <ShaderBall
-                // envMap={texture}
-                position={[0,-100,0
-                ]}
-                timeOffset={Math.random() * 1118173}
-                rotation={[-Math.PI/2, 0, 0]}
-                scale={[2000, 2000, 2000]}
-                movement={.3}
-                factor={.1}
-              >
-          <planeGeometry args={[1, 1,2000,2000]} />
+          // envMap={texture}
+          position={[0, -100, 0]}
+          timeOffset={Math.random() * 1118173}
+          rotation={[-Math.PI / 2, 0, 0]}
+          scale={[2000, 2000, 2000]}
+          movement={0.3}
+          factor={0.1}
+        >
+          <planeGeometry args={[1, 1, 1300, 1300]} />
         </ShaderBall>
+
+        <ShaderBall
+          // envMap={texture}
+          position={[0, 500, 1000]}
+          timeOffset={Math.random() * 1118173}
+          rotation={[Math.PI / 2, 0, 0]}
+          scale={[2000, 2000, 2000]}
+          movement={0.3}
+          factor={0.1}
+        >
+          <planeGeometry args={[1, 1, 1000, 1000]} />
+        </ShaderBall>
+
+        <ShaderBall
+          // envMap={texture}
+          position={[0, -100, 1000]}
+          timeOffset={Math.random() * 1118173}
+          rotation={[-Math.PI / 2, 0, 0]}
+          scale={[500, 500, 500]}
+          movement={0.3}
+          factor={0.1}
+        >
+
+          <polyhedronGeometry args={[verticesOfCube, indicesOfFaces, 1, 3 ]} />
+
+        </ShaderBall>
+
         {/* Your regular scene contents go here, like always ... */}
         <EffectComposer>
           <DepthOfField
