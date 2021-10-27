@@ -1,4 +1,4 @@
-import { Canvas } from "@react-three/fiber";
+import { Canvas, extend, useThree } from "@react-three/fiber";
 import Model from "../components/Ruins";
 import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
 import TerrainTest from "../components/TerrainTest";
@@ -6,6 +6,7 @@ import ShaderBall from "../components/ShaderBall";
 import { CubeCamera } from "@react-three/drei";
 import { Environment } from "@react-three/drei";
 import { useControls } from "leva";
+import * as THREE from "three"
 import {
   EffectComposer,
   ChromaticAberration,
@@ -16,6 +17,17 @@ import {
   ToneMapping,
 } from "@react-three/postprocessing";
 import { BlendFunction } from "postprocessing";
+import { useEffect } from "react";
+
+function AddFog() {
+  let {scene} = useThree();
+  useEffect(() => {
+    scene.fog = new THREE.Fog(new THREE.Color("#000"), 0.0025, 2000);
+  }, [])
+  return <></>;
+}
+
+extend({AddFog});
 
 function Main() {
   const {
@@ -48,6 +60,7 @@ function Main() {
   return (
     <div className="w-screen h-screen">
       <Canvas colorManagement shadowMap pixelRatio={window.devicePixelRatio}>
+        <AddFog/>
         <OrbitControls />
         <PerspectiveCamera
           position={[-2.5, 0.7, 5.5]}

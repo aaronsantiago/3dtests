@@ -31,6 +31,12 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
     shader.uniforms.factor = this._factor;
     shader.uniforms.movement = this._movement;
 
+    shader.uniforms.fogNearColor = { value: new THREE.Color("blue") };
+    shader.uniforms.fogCustomColor = { value: new THREE.Color("red") };
+    shader.uniforms.fogNoiseFreq = { value: .02 };
+    shader.uniforms.fogNoiseSpeed = { value: 1 };
+    shader.uniforms.fogNoiseImpact = { value: 1 };
+
     shader.vertexShader = glsl`
       #pragma glslify: noise = require('glsl-noise/simplex/4d')
       uniform float time;
@@ -49,6 +55,67 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
         vNormal.z += noise(nPos * 3.5);
         `
     );
+
+    shader.vertexShader = shader.vertexShader.replace(`#include <fog_pars_vertex>`, `
+    #ifdef USE_FOG
+      varying float fogDepth;
+      varying vec3 vFogWorldPosition;
+    #endif
+    // `);
+    shader.vertexShader = shader.vertexShader.replace(`#include <fog_vertex>`, `
+    #ifdef USE_FOG
+      // fogDepth = - mvPosition.z;
+      fogDepth = length(mvPosition.xyz - vec3(0.0,0.0,-1000.0)) * 5.0;
+      vFogWorldPosition = (modelMatrix * vec4( transformed, 1.0 )).xyz;
+    #endif
+    `);
+
+
+    shader.fragmentShader = glsl`
+      #pragma glslify: noise = require('glsl-noise/simplex/4d')
+      ${shader.fragmentShader}
+    `;
+    shader.fragmentShader = shader.fragmentShader.replace(`#include <fog_pars_fragment>`, `
+    #ifdef USE_FOG
+      uniform vec3 fogColor;
+      uniform vec3 fogNearColor;
+      uniform vec3 fogCustomColor;
+      varying float fogDepth;
+      #ifdef FOG_EXP2
+        uniform float fogDensity;
+      #else
+        uniform float fogNear;
+        uniform float fogFar;
+      #endif
+      varying vec3 vFogWorldPosition;
+      uniform float time;
+      uniform float fogNoiseSpeed;
+      uniform float fogNoiseFreq;
+      uniform float fogNoiseImpact;
+    #endif
+    `);
+    shader.fragmentShader = shader.fragmentShader.replace(`#include <fog_fragment>`, `
+    #ifdef USE_FOG
+      vec3 windDir = vec3(0.0, 0.0, 0.0);
+      vec3 scrollingPos = vFogWorldPosition.xyz + fogNoiseSpeed * windDir;  
+      // float n = noise(vec4(fogNoiseFreq * scrollingPos.xyz, 1));
+      float vFogDepth = (1.0 - fogNoiseImpact) * fogDepth;
+      #ifdef FOG_EXP2
+      float customColorFactor = 1.0 - exp( - fogDensity * fogDensity * vFogDepth * vFogDepth );
+      float fogFactor = 1.0 - exp( - fogDensity * fogDensity * fogDepth * fogDepth );
+      #else
+      float customColorFactor = smoothstep( fogNear, fogFar, vFogDepth );
+      float fogFactor = smoothstep( fogNear, fogFar, fogDepth );
+      #endif
+      // vec3 foggedCustomColor = mix( fogCustomColor.rgb, fogColor, fogFactor );
+    
+      gl_FragColor.rgb = mix( gl_FragColor.rgb, fogCustomColor, customColorFactor );
+      gl_FragColor.rgb = mix( gl_FragColor.rgb, fogColor, fogFactor );
+    #endif
+    
+    `);
+
+
   }
 
   get time() {
