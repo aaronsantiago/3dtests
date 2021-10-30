@@ -4,6 +4,7 @@
   "private": true,
   "dependencies": {
     "@craco/craco": "^6.3.0",
+    "@react-three/cannon": "^4.0.1",
     "@react-three/drei": "^7.17.1",
     "@react-three/fiber": "^7.0.17",
     "@react-three/postprocessing": "^2.0.5",
@@ -17,10 +18,13 @@
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
     "react-scripts": "4.0.3",
+    "react-snap-scroll": "0.0.5",
+    "tailwindcss-scroll-snap": "^1.1.0",
     "three": "^0.133.1",
     "three-landscape": "^0.2.5",
     "three-stdlib": "^2.5.4",
-    "web-vitals": "^1.1.2"
+    "web-vitals": "^1.1.2",
+    "zustand": "^3.6.1"
   },
   "scripts": {
     "start": "craco start",

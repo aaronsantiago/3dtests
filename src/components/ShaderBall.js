@@ -38,7 +38,8 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
     shader.uniforms.fogNoiseImpact = { value: 1 };
 
     shader.vertexShader = glsl`
-      #pragma glslify: noise = require('glsl-noise/simplex/4d')
+      #pragma glslify: noise = require('glsl-noise/classic/4d')
+      #pragma glslify: snoise = require('glsl-noise/simplex/4d')
       uniform float time;
       uniform float factor;
       uniform float movement;
@@ -49,10 +50,12 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
       `
         vec3 transformed = position;
         vec4 nPos = vec4(position/2.3, time * factor);
-        transformed += sin(time) * vNormal * noise(nPos * 2.5) * 0.8 * movement;
-        vNormal.x += noise(nPos * 1.5);
-        vNormal.y += noise(nPos * 2.5);
-        vNormal.z += noise(nPos * 3.5);
+
+        transformed += vNormal * noise(nPos * 2.0) * 0.8 * movement;
+
+        vNormal.x += snoise(nPos * 1.5);
+        vNormal.y += snoise(nPos * 2.5);
+        vNormal.z += snoise(nPos * 3.5);
         `
     );
 
@@ -65,7 +68,7 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
     shader.vertexShader = shader.vertexShader.replace(`#include <fog_vertex>`, `
     #ifdef USE_FOG
       // fogDepth = - mvPosition.z;
-      fogDepth = length(mvPosition.xyz - vec3(0.0,0.0,-1000.0)) * 5.0;
+      fogDepth = min(- mvPosition.z*7.5, length(mvPosition.xyz - vec3(0.0,mvPosition.y,-1000.0)) * 3.5);
       vFogWorldPosition = (modelMatrix * vec4( transformed, 1.0 )).xyz;
     #endif
     `);
