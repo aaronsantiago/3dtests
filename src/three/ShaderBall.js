@@ -1,16 +1,9 @@
-import * as THREE from "three";
 import { extend, useFrame } from "@react-three/fiber";
 import glsl from "babel-plugin-glsl/macro";
-import { shaderMaterial } from "@react-three/drei";
-import { useRef } from "react";
 import * as React from "react";
-import {
-  MeshStandardMaterial,
-  MeshStandardMaterialParameters,
-  Shader,
-} from "three";
-import { useLoader } from "@react-three/fiber";
-import { TextureLoader } from "three";
+import { useRef } from "react";
+import * as THREE from "three";
+import { MeshStandardMaterial } from "three";
 
 class MegaWobbleMaterial extends MeshStandardMaterial {
   _time = 0;
@@ -21,9 +14,9 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
   constructor(parameters = {}) {
     super(parameters);
     this.setValues(parameters);
-    this._time = { value: 0 };
-    this._factor = { value: 1 };
-    this._movement = { value: 1 };
+    this._time = {value: 0};
+    this._factor = {value: 1};
+    this._movement = {value: 1};
   }
 
   onBeforeCompile(shader) {
@@ -31,11 +24,11 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
     shader.uniforms.factor = this._factor;
     shader.uniforms.movement = this._movement;
 
-    shader.uniforms.fogNearColor = { value: new THREE.Color("blue") };
-    shader.uniforms.fogCustomColor = { value: new THREE.Color("red") };
-    shader.uniforms.fogNoiseFreq = { value: .02 };
-    shader.uniforms.fogNoiseSpeed = { value: 1 };
-    shader.uniforms.fogNoiseImpact = { value: 1 };
+    shader.uniforms.fogNearColor = {value: new THREE.Color("blue")};
+    shader.uniforms.fogCustomColor = {value: new THREE.Color("red")};
+    shader.uniforms.fogNoiseFreq = {value: 0.02};
+    shader.uniforms.fogNoiseSpeed = {value: 1};
+    shader.uniforms.fogNoiseImpact = {value: 1};
 
     shader.vertexShader = glsl`
       #pragma glslify: noise = require('glsl-noise/classic/4d')
@@ -59,26 +52,33 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
         `
     );
 
-    shader.vertexShader = shader.vertexShader.replace(`#include <fog_pars_vertex>`, `
+    shader.vertexShader = shader.vertexShader.replace(
+      `#include <fog_pars_vertex>`,
+      `
     #ifdef USE_FOG
       varying float fogDepth;
       varying vec3 vFogWorldPosition;
     #endif
-    // `);
-    shader.vertexShader = shader.vertexShader.replace(`#include <fog_vertex>`, `
+    // `
+    );
+    shader.vertexShader = shader.vertexShader.replace(
+      `#include <fog_vertex>`,
+      `
     #ifdef USE_FOG
       // fogDepth = - mvPosition.z;
       fogDepth = min(- mvPosition.z*7.5, length(mvPosition.xyz - vec3(0.0,mvPosition.y,-1000.0)) * 3.5);
       vFogWorldPosition = (modelMatrix * vec4( transformed, 1.0 )).xyz;
     #endif
-    `);
-
+    `
+    );
 
     shader.fragmentShader = glsl`
       #pragma glslify: noise = require('glsl-noise/simplex/4d')
       ${shader.fragmentShader}
     `;
-    shader.fragmentShader = shader.fragmentShader.replace(`#include <fog_pars_fragment>`, `
+    shader.fragmentShader = shader.fragmentShader.replace(
+      `#include <fog_pars_fragment>`,
+      `
     #ifdef USE_FOG
       uniform vec3 fogColor;
       uniform vec3 fogNearColor;
@@ -96,8 +96,11 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
       uniform float fogNoiseFreq;
       uniform float fogNoiseImpact;
     #endif
-    `);
-    shader.fragmentShader = shader.fragmentShader.replace(`#include <fog_fragment>`, `
+    `
+    );
+    shader.fragmentShader = shader.fragmentShader.replace(
+      `#include <fog_fragment>`,
+      `
     #ifdef USE_FOG
       vec3 windDir = vec3(0.0, 0.0, 0.0);
       vec3 scrollingPos = vFogWorldPosition.xyz + fogNoiseSpeed * windDir;  
@@ -116,9 +119,8 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
       gl_FragColor.rgb = mix( gl_FragColor.rgb, fogColor, fogFactor );
     #endif
     
-    `);
-
-
+    `
+    );
   }
 
   get time() {
@@ -146,22 +148,13 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
   }
 }
 
-extend({ MegaWobbleMaterial });
+extend({MegaWobbleMaterial});
 
 function ShaderBall(props) {
   let material = useRef();
   let meshRef = useRef();
-  const [colorMap, displacementMap, normalMap, roughnessMap] = useLoader(TextureLoader, [
-    'materials/metal/color.jpg',
-    'materials/metal/displacement.jpg',
-    'materials/metal/normal.jpg',
-    'materials/metal/roughness.jpg'
-  ])
-  let initialY = props.position[2];
   useFrame((state) => {
-    // meshRef.current.position.y = Math.sin(state.clock.getElapsedTime) * initialY;
     material.current.time = state.clock.getElapsedTime() + props.timeOffset;
-    // console.log(material.current);
   });
 
   return (
@@ -170,20 +163,13 @@ function ShaderBall(props) {
       <megaWobbleMaterial
         ref={material}
         metalness={1}
-        roughness={.1}
+        roughness={0.1}
         envMap={props.envMap}
         factor={props.factor}
         displacementScale={0.2}
-        // transparent
-        side= {THREE.DoubleSide}
+        side={THREE.DoubleSide}
         movement={props.movement}
-        // map={colorMap}
         color={"#9f9f9f"}
-        // opacity={.9}
-        // depthWrite={false}
-        // displacementMap={displacementMap}
-        // normalMap={normalMap}
-        // roughnessMap={roughnessMap}
       />
     </mesh>
   );

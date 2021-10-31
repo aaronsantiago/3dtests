@@ -11,7 +11,7 @@ export default function ScrollIndex({ scrollIndex, children, ...props }) {
     let pb = prevScroll.bottom;
     let ct = myDiv.current.getBoundingClientRect().top;
     let cb = myDiv.current.getBoundingClientRect().bottom;
-    if (pt > 0 && ct <= 0) {
+    if (pt > 40 && ct <= 40) {
       setScrollIndex(scrollIndex);
     }
 

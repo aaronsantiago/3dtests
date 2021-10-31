@@ -1,13 +1,8 @@
-import { Canvas, extend, useFrame, useThree } from "@react-three/fiber";
-import { PerspectiveCamera, OrbitControls } from "@react-three/drei";
-import { ContactShadows } from "@react-three/drei";
-import { useEffect, useRef, useState } from "react";
-import DestructableCity from "../components/DestructableCity";
-import TerrainTest from "../components/TerrainTest";
-import { EffectComposer, SSAO } from '@react-three/postprocessing'
-import { BlendFunction } from 'postprocessing'
-
-
+import { PerspectiveCamera } from "@react-three/drei";
+import { useFrame } from "@react-three/fiber";
+import { EffectComposer, SSAO } from "@react-three/postprocessing";
+import { BlendFunction } from "postprocessing";
+import { useRef } from "react";
 
 function RotatingGroup() {
   let group = useRef();
@@ -31,39 +26,25 @@ function RotatingGroup() {
     </group>
   );
 }
-
-function CityScene() {
+function CityStage(props) {
   return (
-    <div className="w-screen h-screen absolute z-0">
-      <Canvas
-        mode="concurrent"
-        colorManagement
-        shadows
-        pixelRatio={window.devicePixelRatio}
-      >
-        <group rotation={[0, (3 * Math.PI) / 4, 0]} position={[4.5, 2.5, -1.5]}>
-          <PerspectiveCamera
-            rotation={[-Math.PI / 8, 0, 0]}
-            makeDefault={true}
-            far={25000}
-            near={0.1}
-            fov={84.4}
-          />
-        </group>
-        <ContactShadows
-          position={[0, 0.3, 0]}
-          width={20}
-          height={20}
-          far={200}
-          rotation={[Math.PI / 2, 0, 0]}
+    <>
+      <group rotation={[0, (3 * Math.PI) / 4, 0]} position={[4.5, 2.5, -1.5]}>
+        <PerspectiveCamera
+          rotation={[-Math.PI / 8, 0, 0]}
+          makeDefault={true}
+          far={25000}
+          near={0.1}
+          fov={84.4}
         />
-        <fog attach="fog" args={["#000", 0.0025, 250]} />
-        <color attach="background" args={["#000"]} />
-        <DestructableCity />
+      </group>
+      <RotatingGroup />
+      <fog attach="fog" args={["#000", 0.0025, 250]} />
+      <color attach="background" args={["#000"]} />
 
-        <TerrainTest/>
-        <RotatingGroup />
-        <EffectComposer>
+      {props.children}
+
+      <EffectComposer>
         <SSAO
           blendFunction={BlendFunction.MULTIPLY} // blend mode
           samples={30} // amount of samples per pixel (shouldn't be a multiple of the ring count)
@@ -77,11 +58,9 @@ function CityScene() {
           scale={1} // scale of the ambient occlusion
           bias={0.5} // occlusion bias
         />
-        </EffectComposer>
-
-      </Canvas>
-    </div>
+      </EffectComposer>
+    </>
   );
 }
 
-export default CityScene;
+export default CityStage;

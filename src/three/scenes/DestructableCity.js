@@ -1,21 +1,17 @@
-import React, { useEffect, useRef } from "react";
-import { useGLTF, PerspectiveCamera, useAnimations } from "@react-three/drei";
-import * as THREE from "three";
 import {
-  Physics,
-  Debug,
-  usePlane,
-  useSphere,
-  useBox,
+  Physics, useBox, usePlane,
+  useSphere
 } from "@react-three/cannon";
+import { useGLTF } from "@react-three/drei";
 import { useFrame } from "@react-three/fiber";
-import Large_buildingA from "./KenneyCity/Large_buildingA.js";
-import Large_buildingB from "./KenneyCity/Large_buildingB.js";
-import Large_buildingC from "./KenneyCity/Large_buildingC.js";
-import Large_buildingD from "./KenneyCity/Large_buildingD.js";
-import Large_buildingE from "./KenneyCity/Large_buildingE.js";
-import Large_buildingF from "./KenneyCity/Large_buildingF.js";
-import Pumpkin from "./KenneyCity/PumpkinBasic";
+import React, { useEffect } from "react";
+import Large_buildingA from "../models/KenneyCity/Large_buildingA.js";
+import Large_buildingB from "../models/KenneyCity/Large_buildingB.js";
+import Large_buildingC from "../models/KenneyCity/Large_buildingC.js";
+import Large_buildingD from "../models/KenneyCity/Large_buildingD.js";
+import Large_buildingE from "../models/KenneyCity/Large_buildingE.js";
+import Large_buildingF from "../models/KenneyCity/Large_buildingF.js";
+import Pumpkin from "../models/KenneyCity/PumpkinBasic";
 
 function Plane(props) {
   const [ref] = usePlane(() => ({
@@ -23,22 +19,19 @@ function Plane(props) {
     rotation: [-Math.PI / 2, 0, 0],
     ...props,
   }));
-  return (
-    <group receiveShadow castShadow ref={ref}>
-    </group>
-  );
+  return <group receiveShadow castShadow ref={ref}></group>;
 }
 function Ball(props) {
-  const [ref,api] = useSphere(() => ({
+  const [ref, api] = useSphere(() => ({
     mass: 20,
     ...props,
   }));
   useFrame(() => {
-    api.applyImpulse([0, 0, 3],[0,0,0]);
+    api.applyImpulse([0, 0, 3], [0, 0, 0]);
   });
   return (
     <object3D receiveShadow castShadow ref={ref}>
-      <Pumpkin position={[0,-.1,0]} scale={[1.5,1.7,1.5]}/>
+      <Pumpkin position={[0, -0.1, 0]} scale={[1.5, 1.7, 1.5]} />
     </object3D>
   );
 }
@@ -68,9 +61,18 @@ export default function DestructableCity({ ...props }) {
     <>
       <Physics broadphase="SAP">
         {/* <Debug> */}
-        <Ball position={[0, 5, -30]} rotation={[Math.PI/3,0,Math.PI/8.324]} />
-        <Ball position={[-3, 5, -40]} rotation={[Math.PI/9,0,Math.PI*2.324]} />
-        <Ball position={[3, 5, -35]} rotation={[Math.PI/5,0,Math.PI/17.324]} />
+        <Ball
+          position={[0, 5, -30]}
+          rotation={[Math.PI / 3, 0, Math.PI / 8.324]}
+        />
+        <Ball
+          position={[-3, 5, -40]}
+          rotation={[Math.PI / 9, 0, Math.PI * 2.324]}
+        />
+        <Ball
+          position={[3, 5, -35]}
+          rotation={[Math.PI / 5, 0, Math.PI / 17.324]}
+        />
         <Plane />
         {Array(20)
           .fill(1)
