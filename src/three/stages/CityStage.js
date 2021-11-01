@@ -19,10 +19,10 @@ function RotatingGroup() {
         shadow-camera-right={10}
         shadow-camera-top={10}
         shadow-camera-bottom={-10}
-        intensity={0.1}
+        intensity={0.7}
         position={[-5, 9, 5]}
       />
-      <directionalLight intensity={0.7} position={[3, 4, -3]} />
+      <directionalLight intensity={0.1} position={[3, 4, -3]} />
     </group>
   );
 }

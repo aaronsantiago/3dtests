@@ -16,7 +16,7 @@ function CityScreen() {
         <CityStage>
           <DestructableCity />
           <Suspense fallback={""}>
-            <TerrainTest />
+            <TerrainTest position={[1,3.4,-16]}/>
           </Suspense>
         </CityStage>
       </Canvas>
