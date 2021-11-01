@@ -9,7 +9,7 @@ import {Suspense} from "react";
 function App() {
   return (
     <>
-      <CustomCursor />
+      {/* <CustomCursor /> */}
       <Switch>
         <Route path="/" exact>
           <FlyThroughScreen />

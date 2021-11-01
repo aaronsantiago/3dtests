@@ -1,4 +1,5 @@
 import {Canvas} from "@react-three/fiber";
+import {useControls} from "leva";
 import {Suspense} from "react";
 import TerrainTest from "../three/models/TerrainTest";
 import DestructableCity from "../three/scenes/DestructableCity";
@@ -16,7 +17,12 @@ function CityScreen() {
         <CityStage>
           <DestructableCity />
           <Suspense fallback={""}>
-            <TerrainTest position={[1,3.4,-16]}/>
+            <group rotation={[0, Math.PI / 6, 0]}>
+              <TerrainTest
+                position={[0, 9.8, 0]}
+                rotation={[-Math.PI / 2, 0, 0]}
+              />
+            </group>
           </Suspense>
         </CityStage>
       </Canvas>

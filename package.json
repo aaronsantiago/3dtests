@@ -3,9 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
-    "@craco/craco": "^6.3.0",
+    "@craco/craco": "^6.4.0",
     "@react-three/cannon": "^4.0.1",
-    "@react-three/drei": "^7.17.1",
+    "@react-three/drei": "^7.19.6",
     "@react-three/fiber": "^7.0.17",
     "@react-three/postprocessing": "^2.0.5",
     "@testing-library/jest-dom": "^5.14.1",
@@ -23,11 +23,11 @@
     "react-snap-scroll": "0.0.5",
     "tailwindcss-scroll-snap": "^1.1.0",
     "three": "^0.133.1",
-    "three-landscape": "^0.2.5",
+    "three-landscape": "^0.3.4",
     "three-noise": "^1.1.0",
-    "three-stdlib": "^2.5.4",
+    "three-stdlib": "^2.5.5",
     "web-vitals": "^1.1.2",
-    "zustand": "^3.6.1"
+    "zustand": "^3.6.2"
   },
   "scripts": {
     "start": "craco start",
