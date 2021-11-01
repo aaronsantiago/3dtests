@@ -26,14 +26,14 @@ function TerrainTest(props) {
       <group
       >
         <mesh receiveShadow>
-          <planeBufferGeometry args={[100, 100, width, height]} />
+          <planeBufferGeometry args={[100, 100, width/8, height/8]} />
           <SplatStandardMaterial
             normalMap={normal}
             splats={[splat]}
             normalMaps={[n1, n2]}
             normalWeights={[1.0, 1.0, 1.0]}
             diffuseMaps={[d1, d2]}
-            scale={[128 / 4, 128 / 2, 128 / 2]}
+            scale={[8, 8]}
             noise={noise}
             displacementMap={displacement}
             displacementScale={10}

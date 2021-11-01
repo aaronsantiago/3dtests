@@ -36,7 +36,7 @@ function Ball(props) {
 function Building({Type, offset, collider, ...props}) {
   const [ref, api] = useBox(() => ({
     mass: 1,
-    position: [0, 3, 0],
+    position: [0, -8, 0],
     args: collider,
     ...props,
   }));
@@ -77,7 +77,7 @@ export default function DestructableCity({...props}) {
           .map((v, i) => (
             <Building
               key={i}
-              position={[(i % 5) * 2.3 - 5, 1.5, Math.floor(i / 5) * 2]}
+              position={[(i % 5) * 2.3 - 5, 1, Math.floor(i / 5) * 2]}
               rotation={[0, (Math.floor(Math.random() * 4) * Math.PI) / 2, 0]}
               {...[
                 {
