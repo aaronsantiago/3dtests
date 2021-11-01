@@ -9,7 +9,7 @@ import {
 import {useControls} from "leva";
 import {BlendFunction} from "postprocessing";
 import {Suspense, useRef} from "react";
-import useScrollLocation from "../../stores/ScrollLocation";
+import useScrollLocation from "../../utils/ScrollLocation";
 import SmoothFollow from "../SmoothFollow";
 
 function WobblyStage(props) {

@@ -24,6 +24,7 @@
     "tailwindcss-scroll-snap": "^1.1.0",
     "three": "^0.133.1",
     "three-landscape": "^0.2.5",
+    "three-noise": "^1.1.0",
     "three-stdlib": "^2.5.4",
     "web-vitals": "^1.1.2",
     "zustand": "^3.6.1"

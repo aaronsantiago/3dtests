@@ -1,5 +1,6 @@
-import { Canvas } from "@react-three/fiber";
+import {Canvas} from "@react-three/fiber";
 import ScrollIndex from "../components/ScrollIndex";
+import DestructableCity from "../three/scenes/DestructableCity";
 import WobblyScene from "../three/scenes/WobblyScene";
 import WobblyStage from "../three/stages/WobblyStage";
 

@@ -4,6 +4,8 @@ import * as React from "react";
 import { useRef } from "react";
 import * as THREE from "three";
 import { MeshStandardMaterial } from "three";
+import { useLoader } from '@react-three/fiber'
+import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
 
 class MegaWobbleMaterial extends MeshStandardMaterial {
   _time = 0;

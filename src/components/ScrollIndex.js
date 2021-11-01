@@ -1,5 +1,5 @@
 import React, { useRef } from 'react'
-import useScrollLocation from "../stores/ScrollLocation"
+import useScrollLocation from "../utils/ScrollLocation"
 import { useEffect } from 'react';
 
 export default function ScrollIndex({ scrollIndex, children, ...props }) {

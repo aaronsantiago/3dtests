@@ -1,10 +1,15 @@
 import "./App.css";
 import CityScreen from "./screens/CityScreen";
-import { Route, Switch } from "react-router";
+import {Route, Switch} from "react-router";
 import FlyThroughScreen from "./screens/FlyThroughScreen";
+import CustomCursor from "./components/CustomCursor";
+import InstancedGridScene from "./screens/InstancedGridScreen";
+import {Suspense} from "react";
 
 function App() {
   return (
+    <>
+      <CustomCursor />
       <Switch>
         <Route path="/" exact>
           <FlyThroughScreen />
@@ -12,7 +17,13 @@ function App() {
         <Route path="/city">
           <CityScreen />
         </Route>
+        <Route path="/grid">
+          <Suspense fallback="hi">
+            <InstancedGridScene />
+          </Suspense>
+        </Route>
       </Switch>
+    </>
   );
 }
 

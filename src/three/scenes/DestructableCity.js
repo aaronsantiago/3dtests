@@ -1,10 +1,7 @@
-import {
-  Physics, useBox, usePlane,
-  useSphere
-} from "@react-three/cannon";
-import { useGLTF } from "@react-three/drei";
-import { useFrame } from "@react-three/fiber";
-import React, { useEffect } from "react";
+import {Physics, useBox, usePlane, useSphere} from "@react-three/cannon";
+import {useGLTF} from "@react-three/drei";
+import {useFrame} from "@react-three/fiber";
+import React, {Suspense, useEffect} from "react";
 import Large_buildingA from "../models/KenneyCity/Large_buildingA.js";
 import Large_buildingB from "../models/KenneyCity/Large_buildingB.js";
 import Large_buildingC from "../models/KenneyCity/Large_buildingC.js";
@@ -36,7 +33,7 @@ function Ball(props) {
   );
 }
 
-function Building({ Type, offset, collider, ...props }) {
+function Building({Type, offset, collider, ...props}) {
   const [ref, api] = useBox(() => ({
     mass: 1,
     position: [0, 3, 0],
@@ -49,14 +46,15 @@ function Building({ Type, offset, collider, ...props }) {
   return (
     <object3D ref={ref}>
       <group position={offset} scale={[1, 1, 1]}>
-        {/* <Large_buildingA castShadow receiveShadow/> */}
-        <Type castShadow receiveShadow />
+        <Suspense fallback={"heh"}>
+          <Type castShadow receiveShadow />
+        </Suspense>
       </group>
     </object3D>
   );
 }
 
-export default function DestructableCity({ ...props }) {
+export default function DestructableCity({...props}) {
   return (
     <>
       <Physics broadphase="SAP">
