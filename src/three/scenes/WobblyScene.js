@@ -65,7 +65,7 @@ function WobblyScene() {
               (r[1] - 0.5) * spawnHeight,
               (r[2] - 0.5) * spawnWidth,
             ]}
-            timeOffset={r[3] * 1118173}
+            timeOffset={r[3] * 1173}
             rotation={[0, -Math.PI / 4, 0]}
             scale={[scale, scale, scale]}
             factor={0.1}

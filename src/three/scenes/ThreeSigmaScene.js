@@ -1,11 +1,12 @@
 import {useCubeTexture, useGLTF, useTexture} from "@react-three/drei";
 import {useFrame} from "@react-three/fiber";
-import React, {Suspense, useState, useRef} from "react";
+import { useControls } from "leva";
+import React, {useRef} from "react";
+import CloudParticle from "../CloudParticle.js";
 import ShaderBall from "../ShaderBall.js";
 
 export default function ThreeSigmaScene({textureNames, ...props}) {
-
-  console.log(textureNames)
+  console.log(textureNames);
   let env = useCubeTexture(textureNames, {path: "gradient/thumbs/"});
   // let env = useCubeTexture(
   //   [
@@ -19,50 +20,40 @@ export default function ThreeSigmaScene({textureNames, ...props}) {
   //   {path: "gradient/thumbs/"}
   // );
 
-  let cloudTexture = useTexture("/cloud.png");
-
   let groupRef = useRef();
   useFrame(({clock}) => {
     groupRef.current.rotation.z = clock.getElapsedTime() / 10;
   });
   return (
     <>
-      {Array(5)
+      {Array(10)
         .fill(1)
-        .map((i) => (
-          <mesh
-            position={[
-              30 * Math.random() - 15,
-              -3 * Math.random() - 2,
-              -20 + Math.random() * 3,
-            ]}
-            scale={[20 * (Math.random() > 0.5 ? -1 : 1), 20, 20]}
-          >
-            <planeGeometry args={[2, 1]} />
-            <meshBasicMaterial transparent opacity={0.24} map={cloudTexture} />
-          </mesh>
-        ))}
-      {Array(5)
-        .fill(1)
-        .map((i) => (
-          <mesh
-            position={[
-              30 * Math.random() - 15,
-              -3 * Math.random(),
-              -3 + Math.random() * 3,
-            ]}
-            scale={[5 * (Math.random() > 0.5 ? -1 : 1), 5, 5]}
-          >
-            <planeGeometry args={[2, 1]} />
-            <meshBasicMaterial transparent opacity={0.24} map={cloudTexture} />
-          </mesh>
-        ))}
-      <group ref={groupRef} position={[0, 3, 0]}>
+        .map((x, i) => {
+          let pos = [
+            30 * Math.random() - 15,
+            -3 * Math.random() - 10,
+            -3 + Math.random() * 3,
+          ];
+          let scale = [0, 0, 0];
+          return (
+            <CloudParticle
+              position={pos}
+              endPosition={pos}
+              scale={scale}
+              endScale={[50 * (Math.random() > 0.5 ? -1 : 1), 50, 50]}
+              startOpacity={0.64}
+              endOpacity={0}
+              time={40}
+              offset={i/10}
+            />
+          );
+        })}
+      <group ref={groupRef} position={[0, 2.5, 0]}>
         <ShaderBall
           timeOffset={1173}
           rotation={[0, 0, 0]}
           scale={[1, 1, 1]}
-          factor={0.1}
+          factor={0.13}
           envMap={env}
           castShadow
           receiveShadow

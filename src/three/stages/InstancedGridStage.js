@@ -72,7 +72,7 @@ export default function InstancedGridStage(props) {
   });
   return (
     <>
-      <OrthographicCamera position={[0,0,0]} near={.01} zoom={100} makeDefault={true}/>
+      <OrthographicCamera near={.01} zoom={100} makeDefault={true}/>
       <ambientLight intensity={ambient.intensity} color={ambient.color} />
       <MouseLight />
       <directionalLight

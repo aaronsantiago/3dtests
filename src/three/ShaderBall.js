@@ -67,8 +67,8 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
       `#include <fog_vertex>`,
       `
     #ifdef USE_FOG
-      // fogDepth = - mvPosition.z;
-      fogDepth = min(- mvPosition.z*7.5, length(mvPosition.xyz - vec3(0.0,mvPosition.y,-1000.0)) * 3.5);
+      fogDepth = - mvPosition.z;
+      // fogDepth = min(- mvPosition.z*7.5, length(mvPosition.xyz - vec3(0.0,mvPosition.y,-1000.0)) * 3.5);
       vFogWorldPosition = (modelMatrix * vec4( transformed, 1.0 )).xyz;
     #endif
     `

@@ -56,7 +56,7 @@ function ThreeSigmaStage(props) {
         sunPosition={[1, 0, 0]}
       />
       <ambientLight intensity={0.2} color={"#8a6300"} />
-      <fogExp2 attach="fog" near={0.1} far={1000} density={0.001} />
+      <fogExp2 attach="fog" near={0.1} color={"#8a6300"} far={3000} density={0.01} />
 
       {/* <Suspense fallback="hi">
         <Environment background={true} preset={"park"} />

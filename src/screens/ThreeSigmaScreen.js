@@ -26,8 +26,8 @@ function ThreeSigmaScreen() {
       >
         <ThreeSigmaStage key="yuanwftaaayunawft">
             <Text
-              position={[13, 32, -75]}
-              fontSize={90}
+              position={[13, 17, -45]}
+              fontSize={40}
               scale={[1,.6,1]}
               metalness={1}
               castShadow
