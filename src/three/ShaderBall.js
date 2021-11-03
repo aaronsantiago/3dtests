@@ -152,7 +152,7 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
 
 extend({MegaWobbleMaterial});
 
-function ShaderBall(props) {
+function ShaderBall({displacementScale = .2, ...props}) {
   let material = useRef();
   let meshRef = useRef();
   useFrame((state) => {
@@ -168,7 +168,7 @@ function ShaderBall(props) {
         roughness={0.1}
         envMap={props.envMap}
         factor={props.factor}
-        displacementScale={0.2}
+        displacementScale={displacementScale}
         side={THREE.DoubleSide}
         movement={props.movement}
         color={"#9f9f9f"}

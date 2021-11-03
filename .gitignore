@@ -12,6 +12,7 @@
 /build
 
 /public/gradient
+/public/terrains
 
 # misc
 .DS_Store
