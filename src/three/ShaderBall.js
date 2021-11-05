@@ -1,11 +1,11 @@
-import { extend, useFrame } from "@react-three/fiber";
+import {extend, useFrame} from "@react-three/fiber";
 import glsl from "babel-plugin-glsl/macro";
 import * as React from "react";
-import { useRef } from "react";
+import {useRef} from "react";
 import * as THREE from "three";
-import { MeshStandardMaterial } from "three";
-import { useLoader } from '@react-three/fiber'
-import { GLTFLoader } from 'three/examples/jsm/loaders/GLTFLoader'
+import {MeshStandardMaterial} from "three";
+import {useLoader} from "@react-three/fiber";
+import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
 
 class MegaWobbleMaterial extends MeshStandardMaterial {
   _time = 0;
@@ -40,6 +40,14 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
       uniform float movement;
       ${shader.vertexShader}
     `;
+    console.log(glsl`
+    #pragma glslify: noise = require('glsl-noise/classic/4d')
+    #pragma glslify: snoise = require('glsl-noise/simplex/4d')
+    uniform float time;
+    uniform float factor;
+    uniform float movement;
+    ${shader.vertexShader}
+  `)
     shader.vertexShader = shader.vertexShader.replace(
       "#include <begin_vertex>",
       `
@@ -152,7 +160,7 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
 
 extend({MegaWobbleMaterial});
 
-function ShaderBall({displacementScale = .2, ...props}) {
+function ShaderBall({displacementScale = 0.2, ...props}) {
   let material = useRef();
   let meshRef = useRef();
   useFrame((state) => {
