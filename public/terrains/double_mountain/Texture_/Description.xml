@@ -1,0 +1,7 @@
+<WorldCreator Version="2.0">
+  <Textures Preview="preview.png" Tags="" Description="" Publisher="" Website="" Guid="64190926-3ee8-4324-98d1-0dc41074acb0">
+    <Diffuse File="FOREST-FLOOR-11_DEPTH_4k.png" Time="131845738160000000" />
+    <Normal File="" Time="132020783443922654" />
+    <Displacement File="" Time="132020783443922654" />
+  </Textures>
+</WorldCreator>

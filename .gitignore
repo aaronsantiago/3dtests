@@ -11,9 +11,6 @@
 # production
 /build
 
-/public/gradient
-/public/terrains
-
 # misc
 .DS_Store
 .env.local

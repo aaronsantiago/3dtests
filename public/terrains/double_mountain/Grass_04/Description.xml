@@ -1,0 +1,7 @@
+<WorldCreator Version="2.0">
+  <Textures Preview="preview.png" Tags="grass" Description="" Publisher="GameTextures" Website="https://www.gametextures.com/" Guid="484d53c3-0379-4965-b963-d323c2a05a75">
+    <Diffuse File="Ground_IslandClumpyGround_col.png" Time="131898814510997324" />
+    <Normal File="Ground_IslandClumpyGround_norm.png" Time="131898817243639373" />
+    <Displacement File="" Time="131927957500495101" />
+  </Textures>
+</WorldCreator>
