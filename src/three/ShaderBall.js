@@ -1,11 +1,9 @@
 import {extend, useFrame} from "@react-three/fiber";
-import glsl from "babel-plugin-glsl/macro";
 import * as React from "react";
 import {useRef} from "react";
 import * as THREE from "three";
 import {MeshStandardMaterial} from "three";
-import {useLoader} from "@react-three/fiber";
-import {GLTFLoader} from "three/examples/jsm/loaders/GLTFLoader";
+import vertexHeader from "./ShaderBall/header.vert";
 
 class MegaWobbleMaterial extends MeshStandardMaterial {
   _time = 0;
@@ -32,29 +30,20 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
     shader.uniforms.fogNoiseSpeed = {value: 1};
     shader.uniforms.fogNoiseImpact = {value: 1};
 
-    shader.vertexShader = glsl`
-      #pragma glslify: noise = require('glsl-noise/classic/4d')
-      #pragma glslify: snoise = require('glsl-noise/simplex/4d')
-      uniform float time;
+    shader.vertexShader =
+      vertexHeader +
+      `uniform float time;
       uniform float factor;
       uniform float movement;
       ${shader.vertexShader}
     `;
-    console.log(glsl`
-    #pragma glslify: noise = require('glsl-noise/classic/4d')
-    #pragma glslify: snoise = require('glsl-noise/simplex/4d')
-    uniform float time;
-    uniform float factor;
-    uniform float movement;
-    ${shader.vertexShader}
-  `)
     shader.vertexShader = shader.vertexShader.replace(
       "#include <begin_vertex>",
       `
         vec3 transformed = position;
         vec4 nPos = vec4(position/2.3, time * factor);
 
-        transformed += vNormal * noise(nPos * 2.0) * 0.8 * movement;
+        transformed += vNormal * cnoise(nPos * 2.0) * 0.8 * movement;
 
         vNormal.x += snoise(nPos * 1.5);
         vNormal.y += snoise(nPos * 2.5);
@@ -82,10 +71,7 @@ class MegaWobbleMaterial extends MeshStandardMaterial {
     `
     );
 
-    shader.fragmentShader = glsl`
-      #pragma glslify: noise = require('glsl-noise/simplex/4d')
-      ${shader.fragmentShader}
-    `;
+    shader.fragmentShader = vertexHeader + shader.fragmentShader;
     shader.fragmentShader = shader.fragmentShader.replace(
       `#include <fog_pars_fragment>`,
       `

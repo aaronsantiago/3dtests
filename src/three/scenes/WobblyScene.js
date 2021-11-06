@@ -1,8 +1,11 @@
+import {useCubeTexture} from "@react-three/drei";
 import {useControls} from "leva";
 import {useEffect, useState} from "react";
 import ShaderBall from "../ShaderBall";
 
-function WobblyScene() {
+function WobblyScene({textureNames, ...props}) {
+  let env = useCubeTexture(textureNames, {path: "gradient/thumbs/"});
+
   const {spawnWidth, sizeRange, spawnHeight} = useControls({
     spawnWidth: 1000,
     spawnHeight: 300,
@@ -43,7 +46,7 @@ function WobblyScene() {
 
   return (
     <>
-      {pointLightList.map((r,i) => (
+      {pointLightList.map((r, i) => (
         <pointLight
           key={"light" + i}
           intensity={r[3] * r[3] * r[4] * r[4] * 30}
@@ -58,7 +61,7 @@ function WobblyScene() {
         let scale = 1 + r[4] * sizeRange;
         return (
           <ShaderBall
-            // envMap={texture}
+            envMap={env}
             key={"ball" + i}
             position={[
               (r[0] - 0.5) * spawnWidth,
@@ -76,7 +79,7 @@ function WobblyScene() {
       })}
 
       <ShaderBall
-        // envMap={texture}
+        envMap={env}
         position={[0, -100, 100]}
         timeOffset={111813}
         rotation={[-Math.PI / 2, 0, 0]}

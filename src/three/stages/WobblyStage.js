@@ -1,4 +1,4 @@
-import {Environment, PerspectiveCamera} from "@react-three/drei";
+import {PerspectiveCamera} from "@react-three/drei";
 import {
   Bloom,
   DepthOfField,
@@ -8,7 +8,7 @@ import {
 } from "@react-three/postprocessing";
 import {useControls} from "leva";
 import {BlendFunction} from "postprocessing";
-import {Suspense, useRef} from "react";
+import {useRef} from "react";
 import useScrollLocation from "../../utils/ScrollLocation";
 import SmoothFollow from "../SmoothFollow";
 
@@ -70,13 +70,6 @@ function WobblyStage(props) {
       />
       <fog attach="fog" args={["#000", 0.0025, 4000]} />
       <color attach="background" args={["#000"]} />
-      <Suspense fallback="hi">
-        <Environment
-          background={false} // Whether to affect scene.background
-          files={`Grainy gradient ${zeroPad(Math.floor(gradientType), 2)}.hdr`}
-          path={"gradient/"}
-        />
-      </Suspense>
 
       <directionalLight castShadow intensity={0.7} position={[0, 9, 10]} />
       {props.children}

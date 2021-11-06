@@ -1,24 +1,11 @@
-import {useCubeTexture, useGLTF, useTexture} from "@react-three/drei";
+import {useCubeTexture, useGLTF} from "@react-three/drei";
 import {useFrame} from "@react-three/fiber";
-import { useControls } from "leva";
 import React, {useRef} from "react";
 import CloudParticle from "../CloudParticle.js";
 import ShaderBall from "../ShaderBall.js";
 
 export default function ThreeSigmaScene({textureNames, ...props}) {
-  console.log(textureNames);
   let env = useCubeTexture(textureNames, {path: "gradient/thumbs/"});
-  // let env = useCubeTexture(
-  //   [
-  //     `Grainy gradient ${zeroPad(Math.floor(Math.random()*78 + 1), 2)}.png`,
-  //     `Grainy gradient ${zeroPad(Math.floor(Math.random()*78 + 1), 2)}.png`,
-  //     `Grainy gradient ${zeroPad(Math.floor(Math.random()*78 + 1), 2)}.png`,
-  //     `Grainy gradient ${zeroPad(Math.floor(Math.random()*78 + 1), 2)}.png`,
-  //     `Grainy gradient ${zeroPad(Math.floor(Math.random()*78 + 1), 2)}.png`,
-  //     `Grainy gradient ${zeroPad(Math.floor(Math.random()*78 + 1), 2)}.png`,
-  //   ],
-  //   {path: "gradient/thumbs/"}
-  // );
 
   let groupRef = useRef();
   useFrame(({clock}) => {
@@ -44,7 +31,7 @@ export default function ThreeSigmaScene({textureNames, ...props}) {
               startOpacity={0.64}
               endOpacity={0}
               time={40}
-              offset={i/10}
+              offset={i / 10}
             />
           );
         })}
