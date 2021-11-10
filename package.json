@@ -20,16 +20,16 @@
     "raw-loader": "^4.0.2",
     "react": "^17.0.2",
     "react-dom": "^17.0.2",
-    "react-router": "^5.2.1",
-    "react-router-dom": "^5.3.0",
     "react-scripts": "4.0.3",
     "react-snap-scroll": "0.0.5",
+    "react-spring": "^9.3.0",
     "tailwindcss-scroll-snap": "^1.1.0",
     "three": "^0.133.1",
     "three-landscape": "^0.3.4",
     "three-noise": "^1.1.0",
     "three-stdlib": "^2.5.5",
     "web-vitals": "^1.1.2",
+    "wouter": "^2.8.0-alpha.1",
     "zustand": "^3.6.2"
   },
   "scripts": {

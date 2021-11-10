@@ -1,6 +1,7 @@
 import "./App.css";
 import CityScreen from "./screens/CityScreen";
-import {Route, Switch} from "react-router";
+// import {Route, Switch} from "react-router";
+import { useLocation, Switch, Route } from "wouter"
 import FlyThroughScreen from "./screens/FlyThroughScreen";
 import CustomCursor from "./components/CustomCursor";
 import InstancedGridScene from "./screens/InstancedGridScreen";
@@ -23,7 +24,7 @@ function App() {
             <InstancedGridScene />
           </Suspense>
         </Route>
-        <Route path="/home">
+        <Route path="/home/:foo*">
           <ThreeSigmaScreen/>
         </Route>
       </Switch>

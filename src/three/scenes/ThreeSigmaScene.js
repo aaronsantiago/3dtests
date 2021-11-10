@@ -1,16 +1,31 @@
 import {useCubeTexture, useGLTF} from "@react-three/drei";
 import {useFrame} from "@react-three/fiber";
 import React, {useRef} from "react";
+import {useTransition} from "react-spring";
+import {Route, Switch, useLocation} from "wouter";
 import CloudParticle from "../CloudParticle.js";
 import ShaderBall from "../ShaderBall.js";
+import WobblyScene from "./WobblyScene";
+import {a} from "@react-spring/three";
+import {useSpring, animated} from "@react-spring/three";
 
 export default function ThreeSigmaScene({textureNames, ...props}) {
-  let env = useCubeTexture(textureNames, {path: "gradient/thumbs/"});
+  // Current route
+  const [location] = useLocation();
+  let env = useCubeTexture(textureNames, {path: "/gradient/thumbs/"});
 
   let groupRef = useRef();
   useFrame(({clock}) => {
+    if (!groupRef.current) return;
+    groupRef.current.rotation.x = Math.PI/2 + .8;
     groupRef.current.rotation.z = clock.getElapsedTime() / 10;
   });
+  const springs = useSpring({
+    wobblySceneScale: location.endsWith("foo") ? 0.003 : 0,
+    torusKnotScale: location.endsWith("foo") ? 0 : 1,
+    config: {friction:70}
+  });
+
   return (
     <>
       {Array(10)
@@ -35,22 +50,51 @@ export default function ThreeSigmaScene({textureNames, ...props}) {
             />
           );
         })}
-      <group ref={groupRef} position={[0, 2.5, 0]}>
-        <ShaderBall
-          timeOffset={1173}
-          rotation={[0, 0, 0]}
-          scale={[1, 1, 1]}
-          factor={0.13}
-          envMap={env}
-          castShadow
-          receiveShadow
-          displacementScale={0.03}
-          movement={0.3}
-        >
-          {/* <sphereGeometry args={[2, 90, 90]} /> */}
-          <torusKnotGeometry args={[2, 0.3, 400, 32, 4, 7]} />
-        </ShaderBall>
+
+      {/* {transition((style, location) => {
+
+        return ( */}
+      {/* <a.group position={style.position}> */}
+      {/* <Switch location={location}> */}
+      {/* <Route path="/home/foo"> */}
+      <group position={[0, 1.5, -30]}>
+        <animated.group scale={springs.wobblySceneScale}>
+          <WobblyScene textureNames={textureNames} />
+        </animated.group>
+        <animated.group scale={1} ref={groupRef}>
+          <ShaderBall
+            timeOffset={1173}
+            rotation={[0, 0, 0]}
+            scale={[3, 3, 3]}
+            factor={0.13}
+            envMap={env}
+            castShadow
+            receiveShadow
+            displacementScale={0.03}
+            movement={0.3}
+          >
+            <torusKnotGeometry args={[2, 0.35, 400, 32, 4, 7]} />
+          </ShaderBall>
+          {/* <ShaderBall
+                      timeOffset={1173}
+                      rotation={[0, 0, 0]}
+                      scale={[3, 3, 3]}
+                      factor={0.13}
+                      envMap={env}
+                      castShadow
+                      receiveShadow
+                      displacementScale={0.03}
+                      movement={0.3}
+                    >
+                      <sphereGeometry args={[1, 32,32]} />
+                    </ShaderBall> */}
+        </animated.group>
       </group>
+      {/* </Route> */}
+      {/* </Switch> */}
+      {/* </a.group>
+        );
+      })} */}
     </>
   );
 }

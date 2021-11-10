@@ -46,7 +46,7 @@ function WobblyScene({textureNames, ...props}) {
 
   return (
     <>
-      {pointLightList.map((r, i) => (
+      {/* {pointLightList.map((r, i) => (
         <pointLight
           key={"light" + i}
           intensity={r[3] * r[3] * r[4] * r[4] * 30}
@@ -56,7 +56,7 @@ function WobblyScene({textureNames, ...props}) {
             (r[2] - 0.5) * 3000,
           ]}
         />
-      ))}
+      ))} */}
       {shaderBallList.map((r, i) => {
         let scale = 1 + r[4] * sizeRange;
         return (
