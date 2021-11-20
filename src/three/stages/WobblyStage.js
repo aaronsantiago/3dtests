@@ -71,7 +71,8 @@ function WobblyStage(props) {
       <fog attach="fog" args={["#000", 0.0025, 4000]} />
       <color attach="background" args={["#000"]} />
 
-      <directionalLight castShadow intensity={0.7} position={[0, 9, 10]} />
+      <directionalLight intensity={0.7} position={[0, 9, 10]} />
+      <directionalLight intensity={0.7} position={[3, -9, -10]} />
       {props.children}
       <EffectComposer>
         <DepthOfField

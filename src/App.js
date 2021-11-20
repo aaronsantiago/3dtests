@@ -11,7 +11,7 @@ import ThreeSigmaScreen from "./screens/ThreeSigmaScreen";
 function App() {
   return (
     <>
-      {/* <CustomCursor /> */}
+      <CustomCursor />
       <Switch>
         <Route path="/" exact>
           <FlyThroughScreen />

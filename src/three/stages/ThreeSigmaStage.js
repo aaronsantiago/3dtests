@@ -14,8 +14,8 @@ function ThreeSigmaStage(props) {
     scale: {x: 1, y: 1, z: 1},
   };
   const springs = useSpring({
-    cameraPosition: [0, 0, location.endsWith("foo") ? -30 : 9.5],
-    config: {friction:0, tension: 1, clamp: true}
+    cameraPosition: [0, 0, location.endsWith("foo") ? -15 : 9.5],
+    config: {friction:1, tension: 1, clamp: true}
   });
 
   // const transition = useTransition(location, {

@@ -23,7 +23,7 @@ export default function ThreeSigmaScene({textureNames, ...props}) {
   const springs = useSpring({
     wobblySceneScale: location.endsWith("foo") ? 0.003 : 0,
     torusKnotScale: location.endsWith("foo") ? 0 : 1,
-    config: {friction:70}
+    config: {friction:150}
   });
 
   return (
@@ -57,7 +57,7 @@ export default function ThreeSigmaScene({textureNames, ...props}) {
       {/* <a.group position={style.position}> */}
       {/* <Switch location={location}> */}
       {/* <Route path="/home/foo"> */}
-      <group position={[0, 1.5, -30]}>
+      <group position={[0, 1.5, -15]}>
         <animated.group scale={springs.wobblySceneScale}>
           <WobblyScene textureNames={textureNames} />
         </animated.group>
