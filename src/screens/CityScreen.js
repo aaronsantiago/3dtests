@@ -7,7 +7,7 @@ import CityStage from "../three/stages/CityStage";
 
 function CityScreen() {
   return (
-    <div className="w-screen h-screen absolute z-0">
+    <div className="w-screen h-screen z-0">
       <Canvas
         mode="concurrent"
         colorManagement
